@@ -1,0 +1,33 @@
+service: jared-aws-nodejs
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: '20201221'
+
+functions:
+  getUser:
+    handler: handlers/handler.getUser
+    events:
+      - httpApi:
+          path: /user/{id}
+          method: get
+  graphqlServer:
+    handler: handlers/graphqlHandlers.server
+    events:
+      - httpApi:
+          path: /
+          method: post
+          cors: true
+  graphqlPlayground:
+    handler: handlers/graphqlHandlers.playground
+    events:
+      - httpApi:
+          path: /
+          method: get
+          cors: true
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline

@@ -1,0 +1,14 @@
+type User {
+	UUID: String
+	FirstName: String
+	LastName: String
+	Email: String
+}
+
+type Query {
+	getUser(uuid: String!): User
+}
+
+schema {
+	query: Query
+}
